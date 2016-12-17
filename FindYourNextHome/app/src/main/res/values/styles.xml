@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="RatingBar"
+        parent="android:Widget.Holo.Light.RatingBar.Small">
+        <item name="android:scaleX">1</item>
+        <item name="android:scaleY">1</item>
+    </style>
+
 </resources>

@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">FindYourNextHome</string>
+    <string name="app_name">HomeRentalBD</string>
+    <string name="MyPreference">homeRentalBdRef</string>
 </resources>
