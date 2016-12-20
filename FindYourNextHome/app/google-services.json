@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "127654492817",
+    "firebase_url": "https://homerentalbd.firebaseio.com",
+    "project_id": "homerentalbd",
+    "storage_bucket": "homerentalbd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:127654492817:android:3be9d82553050c2b",
+        "android_client_info": {
+          "package_name": "comsiteprojectcyborn.google.sites.findyournexthome"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "127654492817-gi241shfje762fnhio8ko2mkaa660aul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1IbscI2APGeI-BE_ai6RuXYEJpCu0J3Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

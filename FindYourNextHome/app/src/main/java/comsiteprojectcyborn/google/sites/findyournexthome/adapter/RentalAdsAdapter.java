@@ -1,6 +1,8 @@
 package comsiteprojectcyborn.google.sites.findyournexthome.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import comsiteprojectcyborn.google.sites.findyournexthome.R;
+import comsiteprojectcyborn.google.sites.findyournexthome.activities.RentDetailView;
 import comsiteprojectcyborn.google.sites.findyournexthome.model.RentalAds;
 
 /**
@@ -40,6 +43,15 @@ public class RentalAdsAdapter extends RecyclerView.Adapter<RentalAdsAdapter.Rent
         holder.bannerImg.setImageResource(R.drawable.profile2);
 //        holder.normImg_one.setImageResource(R.drawable.profile);
 //        holder.normImg_two.setImageResource(R.drawable.profile3);
+
+        holder.rentsView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, RentDetailView.class);
+                context.startActivity(intent);
+//                ((Activity) context).finish();
+            }
+        });
     }
 
     @Override

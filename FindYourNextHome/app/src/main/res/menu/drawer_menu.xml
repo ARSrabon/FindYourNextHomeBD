@@ -5,7 +5,7 @@
         android:icon="@drawable/ic_action_login"
         android:title="Sign In/Sign Up" />
     <item
-        android:id="@+id/home"
+        android:id="@+id/menu_home"
         android:icon="@drawable/ic_action_home"
         android:title="Home"/>
     <item

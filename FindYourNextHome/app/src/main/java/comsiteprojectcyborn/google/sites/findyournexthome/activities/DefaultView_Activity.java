@@ -32,29 +32,26 @@ import comsiteprojectcyborn.google.sites.findyournexthome.model.RentalAds;
 public class DefaultView_Activity extends AppCompatActivity implements Drawer.OnDrawerItemClickListener {
 
     private RecyclerView recyclerView;
+
     private Drawer result;
     private AccountHeader headerResult;
-
+    private Toolbar myToolbar;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
     Spinner areaSpinner;
     Spinner categorySpinner;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_defaultview);
 
-        sharedPreferences = getSharedPreferences(String.valueOf(R.string.MyPreference),MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-
-        editor.putBoolean("loggedin",false);
-        editor.commit();
-
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        setSharedPreferences(); // creates Sharedpref. and editor instances
+        setMyToolbar(); // Toolbar Setter
+        navDrawerMaker(); // NavDrawer Maker
 
         areaSpinner = (Spinner) findViewById(R.id.spin_area);
         categorySpinner = (Spinner) findViewById(R.id.spin_category);
@@ -70,6 +67,44 @@ public class DefaultView_Activity extends AppCompatActivity implements Drawer.On
         areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         areaSpinner.setAdapter(areaAdapter);
 
+
+
+
+
+        ArrayList<RentalAds> rentalAdsArrayList = new ArrayList<RentalAds>();
+        rentalAdsArrayList.add(new RentalAds());
+        rentalAdsArrayList.add(new RentalAds());
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyle_view);
+//        recyclerView.setHasFixedSize(true);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        //linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        try {
+
+            RentalAdsAdapter rentalAdsAdapter = new RentalAdsAdapter(rentalAdsArrayList,DefaultView_Activity.this);
+            recyclerView.setAdapter(rentalAdsAdapter);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void setSharedPreferences(){
+        sharedPreferences = getSharedPreferences(String.valueOf(R.string.MyPreference),MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        editor.putBoolean("loggedin",false);
+        editor.commit();
+    }
+    public void setMyToolbar(){
+        myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+    }
+
+    public void navDrawerMaker(){
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.header)
@@ -102,31 +137,8 @@ public class DefaultView_Activity extends AppCompatActivity implements Drawer.On
                     .inflateMenu(R.menu.drawer_menu)
                     .build();
         }
-
         result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
         result.setOnDrawerItemClickListener(this);
-
-        ArrayList<RentalAds> rentalAdsArrayList = new ArrayList<RentalAds>();
-        rentalAdsArrayList.add(new RentalAds());
-        rentalAdsArrayList.add(new RentalAds());
-
-        recyclerView = (RecyclerView) findViewById(R.id.recyle_view);
-//        recyclerView.setHasFixedSize(true);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        //linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
-
-        try {
-
-            RentalAdsAdapter rentalAdsAdapter = new RentalAdsAdapter(rentalAdsArrayList,DefaultView_Activity.this);
-            recyclerView.setAdapter(rentalAdsAdapter);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
-
     }
 
     @Override
@@ -136,6 +148,10 @@ public class DefaultView_Activity extends AppCompatActivity implements Drawer.On
 
         switch ((int) drawerItem.getIdentifier()){
             case R.id.menu_signin : intent = new Intent(DefaultView_Activity.this,SignIn_activity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.menu_profile : intent = new Intent(DefaultView_Activity.this,EditUserProfile.class);
                 startActivity(intent);
                 finish();
                 break;

@@ -1,20 +1,16 @@
 package comsiteprojectcyborn.google.sites.findyournexthome.activities;
 
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -25,8 +21,9 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
 import comsiteprojectcyborn.google.sites.findyournexthome.R;
+import comsiteprojectcyborn.google.sites.findyournexthome.model.User;
 
-public class RentDetailView extends AppCompatActivity implements Drawer.OnDrawerItemClickListener {
+public class EditUserProfile extends AppCompatActivity implements Drawer.OnDrawerItemClickListener {
 
     private Drawer result;
     private AccountHeader headerResult;
@@ -34,69 +31,72 @@ public class RentDetailView extends AppCompatActivity implements Drawer.OnDrawer
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
-    ImageView img_one;
-    ImageView img_two;
-    ImageView img_three;
-    boolean isImageFitToScreen;
+    private boolean flag = false;
+
+    Button btn_Edit;
+    Button btn_Save;
+    Button btn_Skip;
+
+    EditText edit_userFullname;
+    EditText edit_userName;
+    EditText edit_userEmail;
+    EditText edit_userMobileNo;
+    EditText edit_userTelephone;
+
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rent_detailview);
+        setContentView(R.layout.activity_edit_userprofile);
 
         setSharedPreferences(); // creates Sharedpref. and editor instances
         setMyToolbar(); // Toolbar Setter
         navDrawerMaker(); // NavDrawer Maker
 
-        img_one = (ImageView) findViewById(R.id.img_one);
-        img_two = (ImageView) findViewById(R.id.img_two);
-        img_three = (ImageView) findViewById(R.id.img_three);
+        btn_Edit = (Button) findViewById(R.id.btn_EditProfile);
+        btn_Save = (Button) findViewById(R.id.btn_SaveProfile);
+        btn_Skip = (Button) findViewById(R.id.btn_SkipToHome);
 
+        btn_Save.setVisibility(View.GONE);
+        btn_Skip.setVisibility(View.GONE);
 
-        img_one.setOnClickListener(new View.OnClickListener() {
+        btn_Edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadPhoto(img_one);
+                flag = true;
+
+
+
+                btn_Edit.setVisibility(View.GONE);
+                btn_Save.setVisibility(View.VISIBLE);
+                btn_Skip.setVisibility(View.VISIBLE);
             }
         });
 
-        img_two.setOnClickListener(new View.OnClickListener() {
+        btn_Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadPhoto(img_two);
+
+
+                btn_Edit.setVisibility(View.VISIBLE);
+                btn_Save.setVisibility(View.GONE);
+                btn_Skip.setVisibility(View.GONE);
             }
         });
 
-        img_three.setOnClickListener(new View.OnClickListener() {
+        btn_Skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadPhoto(img_three);
+                Intent intent = new Intent(EditUserProfile.this,DefaultView_Activity.class);
+                if(flag){
+//                    startActivity(intent);
+                }else {
+//                    startActivity(intent);
+                }
             }
         });
-    }
 
-    private void loadPhoto(ImageView imageView) {
-
-        ImageView tempImageView = imageView;
-
-
-        AlertDialog.Builder imageDialog = new AlertDialog.Builder(this);
-        LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
-
-        View layout = inflater.inflate(R.layout.custom_fullimagedialog,
-                (ViewGroup) findViewById(R.id.layout_root));
-        ImageView image = (ImageView) layout.findViewById(R.id.fullimage);
-        image.setImageDrawable(tempImageView.getDrawable());
-        imageDialog.setView(layout);
-        imageDialog.setPositiveButton(getString(R.string.ok_button), new DialogInterface.OnClickListener(){
-
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-
-        });
-        imageDialog.create();
-        imageDialog.show();
     }
 
     public void setSharedPreferences() {
@@ -109,7 +109,6 @@ public class RentDetailView extends AppCompatActivity implements Drawer.OnDrawer
     public void setMyToolbar() {
         myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle("Details");
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
@@ -153,7 +152,18 @@ public class RentDetailView extends AppCompatActivity implements Drawer.OnDrawer
     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
 
         Intent xIntent;
+        switch ((int) drawerItem.getIdentifier()) {
+            case R.id.menu_home:
+                xIntent = new Intent(EditUserProfile.this, DefaultView_Activity.class);
+                if (flag) {
+
+                } else {
+                    startActivity(xIntent);
+                    finish();
+                }
+                break;
+        }
+
         return false;
     }
-
 }
