@@ -36,8 +36,4 @@
         android:id="@+id/menu_view_my_request"
         android:icon="@drawable/ic_action_requests"
         android:title="My Requests" />
-    <item
-        android:id="@+id/menu_logout"
-        android:icon="@drawable/ic_action_logout"
-        android:title="Log Out"/>
 </menu>
