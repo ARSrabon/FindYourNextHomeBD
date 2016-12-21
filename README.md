@@ -8,8 +8,11 @@ FindYourNextHomeBD is Smartphone Application.
 4. Request Rental Ad's <br>
 5. Can post Ratings and Comments for the Ad's <br>
 6. In-App Messaging for commnication <br>
-7. View in GoogleMap <br>
-8. Advanced serach using locations,categories,ratings <br>
+7. Advanced serach using locations,categories,ratings <br>
+8. Area rating circle View using GoogleMap. <br>
+9. View in GoogleMap <br>
+10. Natural Communication with User. <br>
+
 
 <img src="https://cloud.githubusercontent.com/assets/14258095/21294564/b1dd4d70-c569-11e6-8bfa-9fbd926af7c6.png" width="120">
 <img src="https://cloud.githubusercontent.com/assets/14258095/21294533/10754ae6-c569-11e6-8fa9-60da5efaacad.png" width="120">
