@@ -4,10 +4,17 @@
     android:id="@+id/activity_createrentalad"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="comsiteprojectcyborn.google.sites.findyournexthome.activities.CreateRentalAd">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#2196F3"
+        android:elevation="0dp"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:textAlignment="textEnd"
+        android:textDirection="rtl"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
 </RelativeLayout>

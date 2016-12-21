@@ -87,26 +87,6 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/txt_drawingRoom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Drawing Room: "
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/txt_diningRoom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="DiningRoom: "
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/txt_kitchen"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Kitchen: "
-            android:textSize="20sp" />
-        <TextView
             android:id="@+id/txt_lifts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -120,13 +100,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Floor Type: "
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/txt_floorLevel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Floor Level: "
             android:textSize="20sp" />
 
         <TextView
@@ -145,46 +118,12 @@
 
 
         <TextView
-            android:id="@+id/txt_furnishedStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Furnished Status: "
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/txt_propertySize"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Size: 1350 sqft"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/txt_serviceCharge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Service Charge: "
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/txt_securityDeposit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Security Deposite: "
-            android:textSize="20sp" />
-
-        <TextView
             android:id="@+id/txt_rent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Rent: "
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/txt_leaseTerm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lease Term: "
-            android:textSize="20sp" />
         <RelativeLayout
             android:id="@+id/layout_ratings_holder"
             android:layout_width="match_parent"

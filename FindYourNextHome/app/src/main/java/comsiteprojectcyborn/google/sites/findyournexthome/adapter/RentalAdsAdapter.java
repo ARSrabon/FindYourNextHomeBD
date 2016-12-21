@@ -39,7 +39,7 @@ public class RentalAdsAdapter extends RecyclerView.Adapter<RentalAdsAdapter.Rent
     }
 
     @Override
-    public void onBindViewHolder(RentalAdsViewHolder holder, int position) {
+    public void onBindViewHolder(RentalAdsViewHolder holder, final int position) {
         holder.bannerImg.setImageResource(R.drawable.profile2);
 //        holder.normImg_one.setImageResource(R.drawable.profile);
 //        holder.normImg_two.setImageResource(R.drawable.profile3);
@@ -48,6 +48,7 @@ public class RentalAdsAdapter extends RecyclerView.Adapter<RentalAdsAdapter.Rent
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, RentDetailView.class);
+//                String rentID = rentalAdsList.get(position)
                 context.startActivity(intent);
 //                ((Activity) context).finish();
             }

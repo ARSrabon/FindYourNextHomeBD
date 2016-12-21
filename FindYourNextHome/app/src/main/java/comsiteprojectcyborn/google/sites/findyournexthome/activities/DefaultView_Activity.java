@@ -145,7 +145,7 @@ public class DefaultView_Activity extends AppCompatActivity implements Drawer.On
         });
 
 
-        ArrayAdapter<String> areaAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, areas);
+        ArrayAdapter<String> areaAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, areas);
         areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         areaSpinner.setAdapter(areaAdapter);
         areaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -160,7 +160,7 @@ public class DefaultView_Activity extends AppCompatActivity implements Drawer.On
             }
         });
 
-        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, rentTypeList);
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, rentTypeList);
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(categoryAdapter);
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -176,14 +176,27 @@ public class DefaultView_Activity extends AppCompatActivity implements Drawer.On
         });
 
 
-
         rentalAdsArrayList = new ArrayList<RentalAds>();
-        rentalAdsArrayList.add(new RentalAds(3,2,2,true,true,"Banner","4th floor","South","aqs","ff","ff","ff",firebaseUser.getUid(),"01012017"));
-//        rentalAdsArrayList.add(new RentalAds());
+//        rentalAdsArrayList.add(new RentalAds(3, 2, 2, true, true, "Banner", "4th floor", "South", "aqs", "ff", "ff", "ff", firebaseUser.getUid(), "01012017"));
+        rentalAdsArrayList.add(new RentalAds());
 //
 //        for(RentalAds rentalAds:rentalAdsArrayList){
 //            rentsdbRef.push().setValue(rentalAds);
 //        }
+
+        rentsdbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    rentalAdsArrayList.add(snapshot.getValue(RentalAds.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         recyclerView = (RecyclerView) findViewById(R.id.recyle_view);
 //        recyclerView.setHasFixedSize(true);
@@ -275,13 +288,21 @@ public class DefaultView_Activity extends AppCompatActivity implements Drawer.On
                 startActivity(intent);
                 finish();
                 break;
+
             case R.id.menu_profile:
                 intent = new Intent(DefaultView_Activity.this, EditUserProfile.class);
                 startActivity(intent);
                 finish();
                 break;
+
             case R.id.menu_logout:
                 firebaseUser = null;
+                break;
+
+            case R.id.menu_add_rental:
+                intent = new Intent(DefaultView_Activity.this, CreateRentalAd.class);
+                startActivity(intent);
+                finish();
         }
         return false;
     }
