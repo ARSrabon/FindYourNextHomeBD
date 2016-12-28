@@ -1,17 +1,27 @@
 package comsiteprojectcyborn.google.sites.findyournexthome.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.SQLException;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -51,6 +61,8 @@ public class DefaultView_Activity extends AppCompatActivity implements Drawer.On
     Spinner areaSpinner;
     Spinner categorySpinner;
 
+    ImageButton btn_search;
+
     FirebaseUser firebaseUser;
     FirebaseStorage firebaseStorage;
     FirebaseDatabase firebaseDatabase;
@@ -81,6 +93,7 @@ public class DefaultView_Activity extends AppCompatActivity implements Drawer.On
 
         areaSpinner = (Spinner) findViewById(R.id.spin_area);
         categorySpinner = (Spinner) findViewById(R.id.spin_category);
+        btn_search = (ImageButton) findViewById(R.id.btn_search);
 
 //        List<String> areaList = new ArrayList<>();
 //        areaList.add(new String("Adabor"));
@@ -97,6 +110,37 @@ public class DefaultView_Activity extends AppCompatActivity implements Drawer.On
 //            areadbRef.push().setValue(area);
 //        }
 
+        areas = new ArrayList<>();
+        areadbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Log.d("Firebase", "onDataChange: ");
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        areas.add(snapshot.getValue(String.class));
+                        ArrayAdapter<String> areaAdapter = new ArrayAdapter<String>(getBaseContext(), R.layout.spinner_item, areas);
+                        areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        areaSpinner.setAdapter(areaAdapter);
+                        areaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                Toast.makeText(DefaultView_Activity.this, "hello", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView) {
+
+                            }
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         rentTypeList = new ArrayList<>();
         rentsTypedbRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -105,7 +149,7 @@ public class DefaultView_Activity extends AppCompatActivity implements Drawer.On
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         rentTypeList.add(snapshot.getValue(String.class));
-                        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_spinner_item, rentTypeList);
+                        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(getBaseContext(), R.layout.spinner_item, rentTypeList);
                         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         categorySpinner.setAdapter(categoryAdapter);
                         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -138,39 +182,6 @@ public class DefaultView_Activity extends AppCompatActivity implements Drawer.On
 //        for (String rentType : rentTypeList) {
 //            rentsTypedbRef.push().setValue(rentType);
 //        }
-
-
-        areas = new ArrayList<>();
-        areadbRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    Log.d("Firebase", "onDataChange: ");
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        areas.add(snapshot.getValue(String.class));
-                        ArrayAdapter<String> areaAdapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_spinner_item, areas);
-                        areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        areaSpinner.setAdapter(areaAdapter);
-                        areaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                Toast.makeText(DefaultView_Activity.this, "hello", Toast.LENGTH_SHORT).show();
-                            }
-
-                            @Override
-                            public void onNothingSelected(AdapterView<?> adapterView) {
-
-                            }
-                        });
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
 
         rentalAdsArrayList = new ArrayList<RentalAds>();
@@ -209,6 +220,13 @@ public class DefaultView_Activity extends AppCompatActivity implements Drawer.On
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadAdvancedSearchDialog();
+            }
+        });
 
     }
 
@@ -274,6 +292,33 @@ public class DefaultView_Activity extends AppCompatActivity implements Drawer.On
         result.setOnDrawerItemClickListener(this);
     }
 
+    private void loadAdvancedSearchDialog() {
+
+        Spinner spin_area = (Spinner) findViewById(R.id.area_spinner);
+        Spinner spin_type = (Spinner) findViewById(R.id.type_spinner);
+        Spinner spin_beds = (Spinner) findViewById(R.id.bed_spinner);
+        CheckBox chk_lift = (CheckBox) findViewById(R.id.chk_lift);
+        CheckBox chk_parking = (CheckBox) findViewById(R.id.chk_parking);
+
+        AlertDialog.Builder advancedSearch = new AlertDialog.Builder(this);
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        View layout = inflater.inflate(R.layout.advanced_searchdialog,
+                (ViewGroup) findViewById(R.id.layout_root));
+
+        advancedSearch.setView(layout);
+        advancedSearch.setPositiveButton(getString(R.string.search_button), new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+
+        });
+
+        advancedSearch.create();
+        advancedSearch.show();
+    }
+
     @Override
     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
 
@@ -295,7 +340,7 @@ public class DefaultView_Activity extends AppCompatActivity implements Drawer.On
 
             case R.id.menu_logout:
                 FirebaseAuth.getInstance().signOut();
-                intent = new Intent(DefaultView_Activity.this,DefaultView_Activity.class);
+                intent = new Intent(DefaultView_Activity.this, DefaultView_Activity.class);
                 startActivity(intent);
                 finish();
                 break;

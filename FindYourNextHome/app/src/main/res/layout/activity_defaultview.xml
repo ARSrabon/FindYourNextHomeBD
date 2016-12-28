@@ -15,7 +15,17 @@
         android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:textAlignment="textEnd"
         android:textDirection="rtl"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+        <ImageButton
+            android:id="@+id/btn_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="#2196F3"
+            android:paddingRight="15dp"
+            android:src="@drawable/ic_action_search" />
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:id="@+id/layout_spinner_holder"

@@ -111,6 +111,7 @@
                     android:isIndicator="true"
                     android:max="5"
                     android:numStars="5"
+                    android:rating="3.5"
                     android:stepSize="0.01" />
             </RelativeLayout>
 
