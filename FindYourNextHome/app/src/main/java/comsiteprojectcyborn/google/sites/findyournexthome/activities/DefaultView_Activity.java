@@ -105,6 +105,20 @@ public class DefaultView_Activity extends AppCompatActivity implements Drawer.On
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         rentTypeList.add(snapshot.getValue(String.class));
+                        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_spinner_item, rentTypeList);
+                        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        categorySpinner.setAdapter(categoryAdapter);
+                        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                Toast.makeText(DefaultView_Activity.this, "hi", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView) {
+
+                            }
+                        });
                     }
                 }
             }
@@ -134,43 +148,26 @@ public class DefaultView_Activity extends AppCompatActivity implements Drawer.On
                     Log.d("Firebase", "onDataChange: ");
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         areas.add(snapshot.getValue(String.class));
+                        ArrayAdapter<String> areaAdapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_spinner_item, areas);
+                        areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        areaSpinner.setAdapter(areaAdapter);
+                        areaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                Toast.makeText(DefaultView_Activity.this, "hello", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView) {
+
+                            }
+                        });
                     }
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-        ArrayAdapter<String> areaAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, areas);
-        areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        areaSpinner.setAdapter(areaAdapter);
-        areaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(DefaultView_Activity.this, "hello", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, rentTypeList);
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        categorySpinner.setAdapter(categoryAdapter);
-        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(DefaultView_Activity.this, "hi", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
@@ -187,7 +184,7 @@ public class DefaultView_Activity extends AppCompatActivity implements Drawer.On
         rentsdbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     rentalAdsArrayList.add(snapshot.getValue(RentalAds.class));
                 }
             }
@@ -291,12 +288,16 @@ public class DefaultView_Activity extends AppCompatActivity implements Drawer.On
 
             case R.id.menu_profile:
                 intent = new Intent(DefaultView_Activity.this, EditUserProfile.class);
+                intent.putExtra("UserId", firebaseUser.getUid());
                 startActivity(intent);
                 finish();
                 break;
 
             case R.id.menu_logout:
-                firebaseUser = null;
+                FirebaseAuth.getInstance().signOut();
+                intent = new Intent(DefaultView_Activity.this,DefaultView_Activity.class);
+                startActivity(intent);
+                finish();
                 break;
 
             case R.id.menu_add_rental:

@@ -4,9 +4,9 @@
     android:id="@+id/activity_sign_in_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2196F3"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
-    android:background="#2196F3"
     tools:context="comsiteprojectcyborn.google.sites.findyournexthome.activities.SignIn_activity">
 
     <ImageView
@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:background="#FFF"
+        android:inputType="textWebEmailAddress"
         android:hint="Email"
         android:textSize="25sp" />
 
@@ -31,42 +32,43 @@
         android:layout_below="@+id/et_username"
         android:layout_marginTop="10dp"
         android:background="#FFF"
+        android:inputType="textPassword"
         android:hint="Password"
         android:textSize="25sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/et_password">
+        android:layout_below="@+id/et_password"
+        android:layout_marginTop="10dp">
 
         <Button
             android:id="@+id/btn_Signin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Sign In"
-            android:background="#4FC3F7"
             android:layout_marginRight="5dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="#4FC3F7"
+            android:text="Sign In" />
 
         <Button
             android:id="@+id/btn_signup"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Sign Up"
-            android:background="#4FC3F7"
             android:layout_marginLeft="5dp"
-            android:layout_weight="1" />
-        </LinearLayout>
+            android:layout_weight="1"
+            android:background="#4FC3F7"
+            android:text="Sign Up" />
+    </LinearLayout>
 
     <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:background="#2196F3"
-        android:textColor="#FFF"
-        android:text="Forgot password"/>
+        android:text="Forgot password"
+        android:textColor="#FFF" />
 
 </RelativeLayout>

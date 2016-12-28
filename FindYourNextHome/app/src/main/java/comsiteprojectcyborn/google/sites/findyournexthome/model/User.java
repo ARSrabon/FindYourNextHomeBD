@@ -7,11 +7,23 @@ package comsiteprojectcyborn.google.sites.findyournexthome.model;
 public class User extends Person {
     public String username;
     public String password;
+    public String email;
 
-    public User(String fullName, String nId, String mobileNum, String username, String password) {
-        super(fullName, nId, mobileNum);
+    public User() {
+    }
+
+    public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
+        this.email = email;
+    }
+
+    public User(String fullName, String nId, String mobileNum, String phoneNum, String city,
+                String area, String username, String password, String email) {
+        super(fullName, nId, mobileNum, phoneNum, city, area);
+        this.username = username;
+        this.password = password;
+        this.email = email;
     }
 
     public String getUsername() {
@@ -28,5 +40,13 @@ public class User extends Person {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

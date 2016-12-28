@@ -10,11 +10,15 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -39,6 +43,8 @@ public class RentDetailView extends AppCompatActivity implements Drawer.OnDrawer
     ImageView img_three;
     boolean isImageFitToScreen;
 
+    ImageButton btn_addtoWishList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +57,8 @@ public class RentDetailView extends AppCompatActivity implements Drawer.OnDrawer
         img_one = (ImageView) findViewById(R.id.img_one);
         img_two = (ImageView) findViewById(R.id.img_two);
         img_three = (ImageView) findViewById(R.id.img_three);
+
+        btn_addtoWishList = (ImageButton) findViewById(R.id.btn_addtowishlist);
 
 
         img_one.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +79,13 @@ public class RentDetailView extends AppCompatActivity implements Drawer.OnDrawer
             @Override
             public void onClick(View view) {
                 loadPhoto(img_three);
+            }
+        });
+
+        btn_addtoWishList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(RentDetailView.this, "added", Toast.LENGTH_SHORT).show();
             }
         });
     }

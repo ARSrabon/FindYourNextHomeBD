@@ -9,9 +9,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -22,6 +28,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
 import comsiteprojectcyborn.google.sites.findyournexthome.R;
 import comsiteprojectcyborn.google.sites.findyournexthome.model.User;
+import comsiteprojectcyborn.google.sites.findyournexthome.model.UsersWithId;
 
 public class EditUserProfile extends AppCompatActivity implements Drawer.OnDrawerItemClickListener {
 
@@ -43,6 +50,12 @@ public class EditUserProfile extends AppCompatActivity implements Drawer.OnDrawe
     EditText edit_userMobileNo;
     EditText edit_userTelephone;
 
+    Spinner area_spinner;
+    Spinner city_spinner;
+
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+
     User user;
 
     @Override
@@ -50,13 +63,48 @@ public class EditUserProfile extends AppCompatActivity implements Drawer.OnDrawe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_userprofile);
 
+        Intent intent = getIntent();
+        String uID = intent.getStringExtra("UserId");
         setSharedPreferences(); // creates Sharedpref. and editor instances
         setMyToolbar(); // Toolbar Setter
         navDrawerMaker(); // NavDrawer Maker
 
+        edit_userFullname = (EditText) findViewById(R.id.edit_userFullName);
+        edit_userName = (EditText) findViewById(R.id.edit_userFullName);
+        edit_userEmail = (EditText) findViewById(R.id.edit_userEmail);
+        edit_userMobileNo = (EditText) findViewById(R.id.edit_userMobileNo);
+        edit_userTelephone = (EditText) findViewById(R.id.edit_userPhoneNo);
+
+        area_spinner = (Spinner) findViewById(R.id.spin_area);
+        city_spinner = (Spinner) findViewById(R.id.spin_city);
+
         btn_Edit = (Button) findViewById(R.id.btn_EditProfile);
         btn_Save = (Button) findViewById(R.id.btn_SaveProfile);
         btn_Skip = (Button) findViewById(R.id.btn_SkipToHome);
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("UserList");
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Log.d("onDataChange: ",snapshot.getRef().toString());
+                }
+//                UsersWithId userX = dataSnapshot.getValue(UsersWithId.class);
+//                User user = userX.getUser();
+//                edit_userFullname.setText(user.getFullName());
+//                edit_userName.setText(user.getUsername());
+//                edit_userEmail.setText(user.getEmail());
+//                edit_userMobileNo.setText(user.getMobileNum());
+//                edit_userTelephone.setText(user.getPhoneNum());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         btn_Save.setVisibility(View.GONE);
         btn_Skip.setVisibility(View.GONE);
@@ -65,9 +113,6 @@ public class EditUserProfile extends AppCompatActivity implements Drawer.OnDrawe
             @Override
             public void onClick(View view) {
                 flag = true;
-
-
-
                 btn_Edit.setVisibility(View.GONE);
                 btn_Save.setVisibility(View.VISIBLE);
                 btn_Skip.setVisibility(View.VISIBLE);
@@ -88,10 +133,10 @@ public class EditUserProfile extends AppCompatActivity implements Drawer.OnDrawe
         btn_Skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EditUserProfile.this,DefaultView_Activity.class);
-                if(flag){
+                Intent intent = new Intent(EditUserProfile.this, DefaultView_Activity.class);
+                if (flag) {
 //                    startActivity(intent);
-                }else {
+                } else {
 //                    startActivity(intent);
                 }
             }
