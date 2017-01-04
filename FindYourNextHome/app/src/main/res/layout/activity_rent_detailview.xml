@@ -24,9 +24,9 @@
                 android:id="@+id/btn_addtowishlist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingRight="15dp"
                 android:layout_gravity="right"
                 android:background="#2196F3"
+                android:paddingRight="15dp"
                 android:src="@drawable/ic_action_wishlist" />
         </android.support.v7.widget.Toolbar>
 
@@ -34,7 +34,7 @@
             android:id="@+id/lbl_banner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Banner"
+            android:text="Flat For Rent"
             android:textAlignment="center"
             android:textSize="25sp" />
 
@@ -50,57 +50,49 @@
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight="1"
-                android:src="@drawable/testimg" />
+                android:src="@drawable/ft_1" />
 
             <ImageView
                 android:id="@+id/img_two"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight="1"
-                android:src="@drawable/testimg" />
+                android:src="@drawable/ft_2" />
 
             <ImageView
                 android:id="@+id/img_three"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight="1"
-                android:src="@drawable/testimg" />
+                android:src="@drawable/ft_3" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/txt_totalBedRoom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Bed Rooms: "
+            android:text="Bed Rooms: 3"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/txt_baths"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Baths &amp; Toilets: "
+            android:text="Bathrooms: 2 "
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/txt_balcony"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Balcony: "
-            android:textSize="20sp" />
-
-
-        <TextView
-            android:id="@+id/txt_livingRoom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="LivingRoom:"
+            android:text="Balcony: 2"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/txt_lifts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lift Availability: "
+            android:text="Lift Availability: Yes"
             android:textSize="20sp" />
 
 
@@ -108,21 +100,21 @@
             android:id="@+id/txt_floorType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Floor Type: "
+            android:text="Floor Type: 6th Floor , Fully Tiles Floor"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/txt_directionFacing"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Direction Facing: "
+            android:text="Direction Facing: South-West"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/txt_parking"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Parking: "
+            android:text="Parking Available: Yes"
             android:textSize="20sp" />
 
 
@@ -130,7 +122,7 @@
             android:id="@+id/txt_rent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rent: "
+            android:text="Rent: 36500 BDT/Month"
             android:textSize="20sp" />
 
         <RelativeLayout
@@ -156,6 +148,7 @@
                 android:isIndicator="false"
                 android:max="5"
                 android:numStars="5"
+                android:rating="4.5"
                 android:stepSize="0.01" />
 
             <Spinner
@@ -164,21 +157,33 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true" />
 
-            <Button
-                android:id="@+id/btn_sendMessage"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/txt_ratings"
-                android:text="Send Message" />
+                android:layout_below="@+id/txt_ratings">
 
-            <Button
-                android:id="@+id/btn_contactOwner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/txt_ratings"
-                android:text="Contact Owner" />
+                <Button
+                    android:id="@+id/btn_sendMessage"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:text="Send Message"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/btn_viewinmap"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="View Map"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/btn_contactOwner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Make Call"
+                    android:layout_weight="1" />
+            </LinearLayout>
 
         </RelativeLayout>
 

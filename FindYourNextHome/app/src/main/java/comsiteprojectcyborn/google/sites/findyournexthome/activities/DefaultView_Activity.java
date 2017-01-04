@@ -124,7 +124,7 @@ public class DefaultView_Activity extends AppCompatActivity implements Drawer.On
                         areaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                Toast.makeText(DefaultView_Activity.this, "hello", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(DefaultView_Activity.this, "hello", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
@@ -155,7 +155,7 @@ public class DefaultView_Activity extends AppCompatActivity implements Drawer.On
                         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                Toast.makeText(DefaultView_Activity.this, "hi", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(DefaultView_Activity.this, "hi", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
@@ -185,7 +185,12 @@ public class DefaultView_Activity extends AppCompatActivity implements Drawer.On
 
 
         rentalAdsArrayList = new ArrayList<RentalAds>();
-//        rentalAdsArrayList.add(new RentalAds(3, 2, 2, true, true, "Banner", "4th floor", "South", "aqs", "ff", "ff", "ff", firebaseUser.getUid(), "01012017"));
+//        regitntalAdsArrayList.add(new RentalAds(3, 2, 2, true, true, "Banner", "4th floor", "South", "aqs", "ff", "ff", "ff", firebaseUser.getUid(), "01012017"));
+        rentalAdsArrayList.add(new RentalAds());
+        rentalAdsArrayList.add(new RentalAds());
+        rentalAdsArrayList.add(new RentalAds());
+        rentalAdsArrayList.add(new RentalAds());
+        rentalAdsArrayList.add(new RentalAds());
         rentalAdsArrayList.add(new RentalAds());
 //
 //        for(RentalAds rentalAds:rentalAdsArrayList){
@@ -255,7 +260,7 @@ public class DefaultView_Activity extends AppCompatActivity implements Drawer.On
                     .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                         @Override
                         public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
-                            Toast.makeText(DefaultView_Activity.this, "hello", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(DefaultView_Activity.this, "hello", Toast.LENGTH_SHORT).show();
                             return false;
                         }
                     })
@@ -276,7 +281,7 @@ public class DefaultView_Activity extends AppCompatActivity implements Drawer.On
                     .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                         @Override
                         public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
-                            Toast.makeText(DefaultView_Activity.this, "hello", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(DefaultView_Activity.this, "hello", Toast.LENGTH_SHORT).show();
                             return false;
                         }
                     })

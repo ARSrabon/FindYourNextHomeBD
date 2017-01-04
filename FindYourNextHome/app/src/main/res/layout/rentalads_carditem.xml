@@ -17,7 +17,7 @@
                 android:id="@+id/imgview_big"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:src="@drawable/profile2" />
+                android:src="@drawable/ft_3" />
             <!--
             <ImageView
                 android:id="@+id/imgview_small_one"
@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/imgview_big"
-                android:text="Banner"
+                android:text="Flat For rent"
                 android:textSize="20sp" />
 
             <RelativeLayout
@@ -121,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/layout_ratings_holder"
                 android:layout_toRightOf="@id/imgview_big"
-                android:text="Cost/mo: BDT 25000" />
+                android:text="Cost/mo: BDT 36500" />
 
             <TextView
                 android:id="@+id/txt_avail"

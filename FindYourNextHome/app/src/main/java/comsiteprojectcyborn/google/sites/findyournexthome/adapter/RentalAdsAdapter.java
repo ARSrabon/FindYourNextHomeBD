@@ -40,7 +40,7 @@ public class RentalAdsAdapter extends RecyclerView.Adapter<RentalAdsAdapter.Rent
 
     @Override
     public void onBindViewHolder(RentalAdsViewHolder holder, final int position) {
-        holder.bannerImg.setImageResource(R.drawable.profile2);
+        holder.bannerImg.setImageResource(R.drawable.ft_1);
 //        holder.normImg_one.setImageResource(R.drawable.profile);
 //        holder.normImg_two.setImageResource(R.drawable.profile3);
 
